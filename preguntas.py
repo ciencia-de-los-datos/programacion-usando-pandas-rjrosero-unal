@@ -53,7 +53,7 @@ def pregunta_03():
 
     """
     
-    return tbl0.groupby(by=["_c1"]).size()
+    return tbl0.groupby(by=["_c1"])["_c1"].count()
 
 
 def pregunta_04():
@@ -68,7 +68,8 @@ def pregunta_04():
     E    4.785714
     Name: _c2, dtype: float64
     """
-    return
+    
+    return tbl0.groupby(by=["_c1"])["_c2"].mean()
 
 
 def pregunta_05():
@@ -85,7 +86,7 @@ def pregunta_05():
     E    9
     Name: _c2, dtype: int64
     """
-    return
+    return tbl0.groupby(by=["_c1"])["_c2"].max()
 
 
 def pregunta_06():
