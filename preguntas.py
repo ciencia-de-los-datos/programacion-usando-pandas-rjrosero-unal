@@ -34,7 +34,8 @@ def pregunta_02():
     4
 
     """
-    return
+
+    return len(tbl0.columns)
 
 
 def pregunta_03():
@@ -51,7 +52,8 @@ def pregunta_03():
     Name: _c1, dtype: int64
 
     """
-    return
+    
+    return tbl0.groupby(by=["_c1"]).size()
 
 
 def pregunta_04():
