@@ -98,8 +98,15 @@ def pregunta_06():
     ['A', 'B', 'C', 'D', 'E', 'F', 'G']
 
     """
-    return
+    letras = tbl1["_c4"].unique().tolist()#.sort(key = lambda x: x[0])
 
+    letras.sort(key = lambda x: x[0])
+
+    letrasMayusculas = [x.upper() for x in letras]
+
+    letrasMayusculas
+
+    return letrasMayusculas
 
 def pregunta_07():
     """
