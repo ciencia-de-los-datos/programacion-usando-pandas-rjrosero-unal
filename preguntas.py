@@ -161,7 +161,8 @@ def pregunta_09():
     39   39   E    5  1998-01-26  1998
 
     """
-    return
+    
+    return tbl0['year'] = pd.DatetimeIndex(tbl0['_c3']).year
 
 
 def pregunta_10():
