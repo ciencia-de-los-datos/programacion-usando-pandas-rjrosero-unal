@@ -140,7 +140,10 @@ def pregunta_08():
     39   39   E    5  1998-01-26    44
 
     """
-    return
+    
+    tbl0['Suma'] = tbl0.apply(lambda row: row._c0 + row._c2, axis=1)
+
+    return tbl0
 
 
 def pregunta_09():
