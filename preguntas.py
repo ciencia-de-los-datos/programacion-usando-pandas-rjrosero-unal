@@ -162,7 +162,7 @@ def pregunta_09():
 
     """
     
-    tbl0['year'] = pd.DatetimeIndex(tbl0['_c3']).year
+    tbl0['year'] = pd.DatetimeIndex(tbl0['_c3']).year.astype(str)
 
     return tbl0 
 
