@@ -141,7 +141,7 @@ def pregunta_08():
 
     """
     
-    tbl0['Suma'] = tbl0.apply(lambda row: row._c0 + row._c2, axis=1)
+    tbl0['suma'] = tbl0.apply(lambda row: row._c0 + row._c2, axis=1)
 
     return tbl0
 
