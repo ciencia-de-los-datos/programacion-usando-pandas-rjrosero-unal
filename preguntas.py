@@ -245,7 +245,7 @@ def pregunta_11():
             listaValores.append(str(valores[1]))
 
     listaDatos.append((primer_numero,joined_string))
-    dataFrameFinal = pd.DataFrame(listaDatos, columns=['_c0','_c4'])#, index=pd.Series(numeros, name="_c0"))
+    dataFrameFinal = pd.DataFrame(listaDatos, columns=['_c0','_c4'])
 
     return dataFrameFinal
 
@@ -265,7 +265,31 @@ def pregunta_12():
     38   38                    eee:0,fff:9,iii:2
     39   39                    ggg:3,hhh:8,jjj:5
     """
-    return
+
+    listaValores = []
+    listaDatos = []
+    dataOrdenado = pd.DataFrame()
+    dataFrameFinal = pd.DataFrame()
+
+    dataOrdenado=tbl2.sort_values(by=['_c0','_c5a','_c5b'])
+    numeros = dataOrdenado['_c0'].unique().tolist()
+
+    primer_numero = dataOrdenado.iloc[0]['_c0']
+
+    for index, valores in dataOrdenado.iterrows():
+        if(primer_numero == valores[0]):
+            listaValores.append(valores[1]+':'+str(valores[2]))
+            joined_string = ",".join(listaValores)
+        else:
+            listaDatos.append((primer_numero,joined_string))
+            primer_numero = valores[0]
+            listaValores.clear()
+            listaValores.append(valores[1]+':'+str(valores[2]))
+
+    listaDatos.append((primer_numero,joined_string))
+    dataFrameFinal = pd.DataFrame(listaDatos, columns=['_c0','_c5'])
+
+    return dataFrameFinal
 
 
 def pregunta_13():
