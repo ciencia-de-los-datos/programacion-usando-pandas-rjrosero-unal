@@ -181,7 +181,29 @@ def pregunta_10():
     3   D                  1:2:3:5:5:7
     4   E  1:1:2:3:3:4:5:5:5:6:7:8:8:9
     """
-    return
+
+    listaValores = []
+    dataFrameFinal = pd.DataFrame(columns=['_c0','_c1'])
+
+    tbl0=tbl0.sort_values(by=['_c1','_c2'])
+
+    primera_letra = tbl0.iloc[0]['_c1']
+    i=0
+
+    for index, valores in tbl0.iterrows():
+        if(primera_letra == valores[1]):
+            listaValores.append(str(valores[2]))
+            joined_string = ":".join(listaValores)
+        else:
+            dataFrameFinal.loc[i] = [primera_letra, joined_string]
+            primera_letra = valores[1]
+            i+=1
+            listaValores.clear()
+            listaValores.append(str(valores[2]))
+    
+    dataFrameFinal.loc[i] = [primera_letra, joined_string]
+
+    return dataFrameFinal
 
 
 def pregunta_11():
