@@ -196,13 +196,13 @@ def pregunta_10():
             listaValores.append(str(valores[2]))
             joined_string = ":".join(listaValores)
         else:
-            dataFrameFinal.loc[i] = [primera_letra, joined_string]
+            dataFrameFinal.loc[primera_letra] = [primera_letra, joined_string]
             primera_letra = valores[1]
             i+=1
             listaValores.clear()
             listaValores.append(str(valores[2]))
     
-    dataFrameFinal.loc[i] = [primera_letra, joined_string]
+    dataFrameFinal.loc[primera_letra] = [primera_letra, joined_string]
 
     return dataFrameFinal
 
