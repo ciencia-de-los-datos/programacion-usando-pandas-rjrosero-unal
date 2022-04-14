@@ -245,7 +245,7 @@ def pregunta_11():
             listaValores.append(str(valores[1]))
 
     listaDatos.append(joined_string)
-    dataFrameFinal = pd.DataFrame(listaDatos, columns=['_c0'], index=pd.Series(numeros, name="_c4"))
+    dataFrameFinal = pd.DataFrame(listaDatos, columns=['_c4'], index=pd.Series(numeros, name="_c0"))
 
     return dataFrameFinal
 
