@@ -239,13 +239,13 @@ def pregunta_11():
             listaValores.append(str(valores[1]))
             joined_string = ",".join(listaValores)    
         else:
-            listaDatos.append(joined_string)
+            listaDatos.append((primer_numero,joined_string))
             primer_numero = valores[0]
             listaValores.clear()
             listaValores.append(str(valores[1]))
 
-    listaDatos.append(joined_string)
-    dataFrameFinal = pd.DataFrame(listaDatos, columns=['_c4'], index=pd.Series(numeros, name="_c0"))
+    listaDatos.append((primer_numero,joined_string))
+    dataFrameFinal = pd.DataFrame(listaDatos, columns=['_c0','_c4'])#, index=pd.Series(numeros, name="_c0"))
 
     return dataFrameFinal
 
