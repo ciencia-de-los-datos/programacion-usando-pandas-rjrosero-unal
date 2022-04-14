@@ -204,7 +204,7 @@ def pregunta_10():
     
     dataFrameFinal.loc[primera_letra] = [primera_letra, joined_string]
 
-    return dataFrameFinal
+    return dataFrameFinal.to_string(index=False)
 
 
 def pregunta_11():
