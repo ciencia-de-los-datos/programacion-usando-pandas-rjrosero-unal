@@ -183,28 +183,29 @@ def pregunta_10():
     """
 
     listaValores = []
+    listaDatos = []
     dataOrdenado = pd.DataFrame()
-    dataFrameFinal = pd.DataFrame(columns=['_c1','_c2'])
+    dataFrameFinal = pd.DataFrame()
 
     dataOrdenado = tbl0.sort_values(by=['_c1','_c2'])
+    letras = dataOrdenado['_c1'].unique().tolist()
 
     primera_letra = dataOrdenado.iloc[0]['_c1']
-    i=0
 
     for index, valores in dataOrdenado.iterrows():
         if(primera_letra == valores[1]):
             listaValores.append(str(valores[2]))
-            joined_string = ":".join(listaValores)
+            joined_string = ":".join(listaValores)    
         else:
-            dataFrameFinal.loc[primera_letra] = [primera_letra, joined_string]
+            listaDatos.append(joined_string)
             primera_letra = valores[1]
-            i+=1
             listaValores.clear()
             listaValores.append(str(valores[2]))
-    
-    dataFrameFinal.loc[primera_letra] = [primera_letra, joined_string]
 
-    return dataFrameFinal.to_string(index=False)
+    listaDatos.append(joined_string)
+    dataFrameFinal = pd.DataFrame(listaDatos, columns=['_c2'], index=pd.Series(letras, name="_c1"))
+
+    return dataFrameFinal
 
 
 def pregunta_11():
