@@ -224,7 +224,30 @@ def pregunta_11():
     38   38      d,e
     39   39    a,d,f
     """
-    return
+    listaValores = []
+    listaDatos = []
+    dataOrdenado = pd.DataFrame()
+    dataFrameFinal = pd.DataFrame()
+
+    dataOrdenado=tbl1.sort_values(by=['_c0','_c4'])
+    numeros = dataOrdenado['_c0'].unique().tolist()
+
+    primer_numero = dataOrdenado.iloc[0]['_c0']
+
+    for index, valores in dataOrdenado.iterrows():
+        if(primer_numero == valores[0]):
+            listaValores.append(str(valores[1]))
+            joined_string = ",".join(listaValores)    
+        else:
+            listaDatos.append(joined_string)
+            primer_numero = valores[0]
+            listaValores.clear()
+            listaValores.append(str(valores[1]))
+
+    listaDatos.append(joined_string)
+    dataFrameFinal = pd.DataFrame(listaDatos, columns=['_c2'], index=pd.Series(numeros, name="_c1"))
+
+    return dataFrameFinal
 
 
 def pregunta_12():
