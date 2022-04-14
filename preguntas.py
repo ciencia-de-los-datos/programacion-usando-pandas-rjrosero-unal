@@ -183,14 +183,15 @@ def pregunta_10():
     """
 
     listaValores = []
+    dataOrdenado = pd.DataFrame()
     dataFrameFinal = pd.DataFrame(columns=['_c0','_c1'])
 
-    tbl0.sort_values(by=['_c1','_c2'])
+    dataOrdenado = tbl0.sort_values(by=['_c1','_c2'])
 
-    primera_letra = tbl0.iloc[0]['_c1']
+    primera_letra = dataOrdenado.iloc[0]['_c1']
     i=0
 
-    for index, valores in tbl0.iterrows():
+    for index, valores in dataOrdenado.iterrows():
         if(primera_letra == valores[1]):
             listaValores.append(str(valores[2]))
             joined_string = ":".join(listaValores)
