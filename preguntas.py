@@ -306,4 +306,8 @@ def pregunta_13():
     E    275
     Name: _c5b, dtype: int64
     """
-    return
+    
+    mergeDatos = pd.merge(tbl0, tbl2, on="_c0")
+    resultado = mergeDatos.groupby(by=["_c1"])["_c5b"].sum()
+
+    return resultado
