@@ -185,7 +185,7 @@ def pregunta_10():
     listaValores = []
     dataFrameFinal = pd.DataFrame(columns=['_c0','_c1'])
 
-    tbl0=tbl0.sort_values(by=['_c1','_c2'])
+    tbl0 = tbl0.sort_values(by=['_c1','_c2'])
 
     primera_letra = tbl0.iloc[0]['_c1']
     i=0
