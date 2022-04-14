@@ -184,7 +184,7 @@ def pregunta_10():
 
     listaValores = []
     dataOrdenado = pd.DataFrame()
-    dataFrameFinal = pd.DataFrame(columns=['_c0','_c1'])
+    dataFrameFinal = pd.DataFrame(columns=['_c1','_c2'])
 
     dataOrdenado = tbl0.sort_values(by=['_c1','_c2'])
 
@@ -196,13 +196,13 @@ def pregunta_10():
             listaValores.append(str(valores[2]))
             joined_string = ":".join(listaValores)
         else:
-            dataFrameFinal.loc[primera_letra] = [primera_letra, joined_string]
+            dataFrameFinal.loc[i] = [primera_letra, joined_string]
             primera_letra = valores[1]
             i+=1
             listaValores.clear()
             listaValores.append(str(valores[2]))
     
-    dataFrameFinal.loc[primera_letra] = [primera_letra, joined_string]
+    dataFrameFinal.loc[i] = [primera_letra, joined_string]
 
     return dataFrameFinal
 
