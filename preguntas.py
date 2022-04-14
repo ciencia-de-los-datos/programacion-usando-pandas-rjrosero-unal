@@ -22,7 +22,8 @@ def pregunta_01():
     40
 
     """
-    return
+    
+    return len(tbl0)
 
 
 def pregunta_02():
@@ -33,7 +34,8 @@ def pregunta_02():
     4
 
     """
-    return
+
+    return len(tbl0.columns)
 
 
 def pregunta_03():
@@ -50,7 +52,8 @@ def pregunta_03():
     Name: _c1, dtype: int64
 
     """
-    return
+    
+    return tbl0.groupby(by=["_c1"])["_c1"].count()
 
 
 def pregunta_04():
@@ -65,7 +68,8 @@ def pregunta_04():
     E    4.785714
     Name: _c2, dtype: float64
     """
-    return
+    
+    return tbl0.groupby(by=["_c1"])["_c2"].mean()
 
 
 def pregunta_05():
@@ -82,7 +86,7 @@ def pregunta_05():
     E    9
     Name: _c2, dtype: int64
     """
-    return
+    return tbl0.groupby(by=["_c1"])["_c2"].max()
 
 
 def pregunta_06():
@@ -94,8 +98,15 @@ def pregunta_06():
     ['A', 'B', 'C', 'D', 'E', 'F', 'G']
 
     """
-    return
+    letras = tbl1["_c4"].unique().tolist()#.sort(key = lambda x: x[0])
 
+    letras.sort(key = lambda x: x[0])
+
+    letrasMayusculas = [x.upper() for x in letras]
+
+    letrasMayusculas
+
+    return letrasMayusculas
 
 def pregunta_07():
     """
@@ -110,7 +121,8 @@ def pregunta_07():
     E    67
     Name: _c2, dtype: int64
     """
-    return
+    
+    return tbl0.groupby(by=["_c1"])["_c2"].sum()
 
 
 def pregunta_08():
@@ -128,7 +140,10 @@ def pregunta_08():
     39   39   E    5  1998-01-26    44
 
     """
-    return
+    
+    tbl0['suma'] = tbl0.apply(lambda row: row._c0 + row._c2, axis=1)
+
+    return tbl0
 
 
 def pregunta_09():
@@ -146,7 +161,10 @@ def pregunta_09():
     39   39   E    5  1998-01-26  1998
 
     """
-    return
+    
+    tbl0['year'] = pd.DatetimeIndex(tbl0['_c3']).year.astype(str)
+
+    return tbl0 
 
 
 def pregunta_10():
@@ -163,7 +181,31 @@ def pregunta_10():
     3   D                  1:2:3:5:5:7
     4   E  1:1:2:3:3:4:5:5:5:6:7:8:8:9
     """
-    return
+
+    listaValores = []
+    listaDatos = []
+    dataOrdenado = pd.DataFrame()
+    dataFrameFinal = pd.DataFrame()
+
+    dataOrdenado = tbl0.sort_values(by=['_c1','_c2'])
+    letras = dataOrdenado['_c1'].unique().tolist()
+
+    primera_letra = dataOrdenado.iloc[0]['_c1']
+
+    for index, valores in dataOrdenado.iterrows():
+        if(primera_letra == valores[1]):
+            listaValores.append(str(valores[2]))
+            joined_string = ":".join(listaValores)    
+        else:
+            listaDatos.append(joined_string)
+            primera_letra = valores[1]
+            listaValores.clear()
+            listaValores.append(str(valores[2]))
+
+    listaDatos.append(joined_string)
+    dataFrameFinal = pd.DataFrame(listaDatos, columns=['_c2'], index=pd.Series(letras, name="_c1"))
+
+    return dataFrameFinal
 
 
 def pregunta_11():
@@ -182,7 +224,30 @@ def pregunta_11():
     38   38      d,e
     39   39    a,d,f
     """
-    return
+    listaValores = []
+    listaDatos = []
+    dataOrdenado = pd.DataFrame()
+    dataFrameFinal = pd.DataFrame()
+
+    dataOrdenado=tbl1.sort_values(by=['_c0','_c4'])
+    numeros = dataOrdenado['_c0'].unique().tolist()
+
+    primer_numero = dataOrdenado.iloc[0]['_c0']
+
+    for index, valores in dataOrdenado.iterrows():
+        if(primer_numero == valores[0]):
+            listaValores.append(str(valores[1]))
+            joined_string = ",".join(listaValores)    
+        else:
+            listaDatos.append((primer_numero,joined_string))
+            primer_numero = valores[0]
+            listaValores.clear()
+            listaValores.append(str(valores[1]))
+
+    listaDatos.append((primer_numero,joined_string))
+    dataFrameFinal = pd.DataFrame(listaDatos, columns=['_c0','_c4'])
+
+    return dataFrameFinal
 
 
 def pregunta_12():
@@ -200,7 +265,31 @@ def pregunta_12():
     38   38                    eee:0,fff:9,iii:2
     39   39                    ggg:3,hhh:8,jjj:5
     """
-    return
+
+    listaValores = []
+    listaDatos = []
+    dataOrdenado = pd.DataFrame()
+    dataFrameFinal = pd.DataFrame()
+
+    dataOrdenado=tbl2.sort_values(by=['_c0','_c5a','_c5b'])
+    numeros = dataOrdenado['_c0'].unique().tolist()
+
+    primer_numero = dataOrdenado.iloc[0]['_c0']
+
+    for index, valores in dataOrdenado.iterrows():
+        if(primer_numero == valores[0]):
+            listaValores.append(valores[1]+':'+str(valores[2]))
+            joined_string = ",".join(listaValores)
+        else:
+            listaDatos.append((primer_numero,joined_string))
+            primer_numero = valores[0]
+            listaValores.clear()
+            listaValores.append(valores[1]+':'+str(valores[2]))
+
+    listaDatos.append((primer_numero,joined_string))
+    dataFrameFinal = pd.DataFrame(listaDatos, columns=['_c0','_c5'])
+
+    return dataFrameFinal
 
 
 def pregunta_13():
@@ -217,4 +306,8 @@ def pregunta_13():
     E    275
     Name: _c5b, dtype: int64
     """
-    return
+    
+    mergeDatos = pd.merge(tbl0, tbl2, on="_c0")
+    resultado = mergeDatos.groupby(by=["_c1"])["_c5b"].sum()
+
+    return resultado
